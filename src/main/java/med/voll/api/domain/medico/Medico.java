@@ -1,6 +1,5 @@
-package med.voll.api.medico;
+package med.voll.api.domain.medico;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.direccion.Direccion;
+import med.voll.api.domain.direccion.Direccion;
+
 
 @Table(name = "medicos")
 @Entity(name = "Medico")

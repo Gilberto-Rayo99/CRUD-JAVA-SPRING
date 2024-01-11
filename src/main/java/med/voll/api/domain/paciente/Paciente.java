@@ -1,9 +1,7 @@
-package med.voll.api.paciente;
+package med.voll.api.domain.paciente;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import med.voll.api.direccion.Direccion;
+import med.voll.api.domain.direccion.Direccion;
 
 @Table(name = "pacientes")
 @Entity(name = "Paciente")
@@ -35,7 +33,7 @@ public class Paciente {
     private String nombre;
     private String email;
     private String telefono;
-    private boolean activo;
+    private boolean activo=true;
     
     @Embedded
     private Direccion direccion;
@@ -53,5 +51,9 @@ public class Paciente {
     public void desactivarPaciente() {
         this.activo=false;
     }
+
+    
+
+    
 
 }
