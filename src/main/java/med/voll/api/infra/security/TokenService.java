@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,28 @@ try {
 } catch (JWTCreationException exception){
 throw new RuntimeException();
 }    }
+
+    public String getSubject(String token) {
+        if (token == null || token.isEmpty()){
+            throw new RuntimeException();
+        }
+        DecodedJWT verifier = null;
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret); //validando la firma
+            verifier = JWT.require(algorithm)
+                    .withIssuer("voll med")
+                    .build()
+                    .verify(token);
+            verifier.getSubject();
+
+        } catch (JWTVerificationException exception) {
+            System.out.println(exception.toString());        }
+        if (verifier.getSubject() == null) {
+            throw new RuntimeException("Verifier Invalido");
+        }
+        return verifier.getSubject();
+
+    }
 
 private Instant generarFechaExpiracion(){
     return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-05:00"));
